@@ -107,7 +107,7 @@ namespace GenericRepository
             {
                 if (IsEntityProperty(property))
                 {
-                    if (property.PropertyType.IsArray || (property.PropertyType.IsGenericType && property.PropertyType.GetGenericTypeDefinition() == typeof(IEnumerable<>)))
+                    if (property.PropertyType.IsArray || (property.PropertyType.IsGenericType && property.PropertyType.GetGenericTypeDefinition() == typeof(List<>)))
                     {
                         IEnumerable<object> itensOfArray = (IEnumerable<object>)property.GetValue(entity);
 
