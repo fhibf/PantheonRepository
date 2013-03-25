@@ -11,8 +11,9 @@ using System.Threading.Tasks;
 
 namespace GenericRepository
 {
-    public class PantheonRepository<TEntity> 
+    public class PantheonRepository<TEntity, TDbContext> : IPantheonRepository<TEntity> 
             where TEntity : class
+            where TDbContext : class
     {
         private enum RepositoryAction
         {
@@ -29,11 +30,9 @@ namespace GenericRepository
         /// Create new context do manipulate data.
         /// </summary>
         /// <returns>Return new instance of the context.</returns>
-        public DbContext CreateContext()
+        protected DbContext CreateContext()
         {
-            var context = new ContextoDados();
-
-            return context;
+            return (DbContext)Activator.CreateInstance(typeof(TDbContext));
         }
 
         /// <summary>

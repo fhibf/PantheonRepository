@@ -1,4 +1,6 @@
 ﻿using GenericRepository;
+using SaleData.Repository;
+using SaleEntities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,17 +26,16 @@ namespace Playground
 
                 // Criar novos pedidos
                 CriarNovosPedidos();
-
             }
         }
 
         private static void CriarNovosPedidos()
         {
-            var repProdutos = new PantheonRepository<Produto>();
-            var repClientes = new PantheonRepository<Customer>();
+            var repProdutos = new ProductRepository();
+            var repClientes = new CustomerRepository();
 
             var produtos = repProdutos.GetAll().ToArray();
-            var clientes = repClientes.GetAll("EnderecoAtual").ToArray();
+            var clientes = repClientes.GetAll("CurrentAddress").ToArray();
 
             var listOfPedidos = new List<SalesOrder>(1);
             for (int i = 0; i < 50; i++)
@@ -42,7 +43,7 @@ namespace Playground
                 Random random = new Random(DateTime.Now.Millisecond);
 
                 SalesOrder pedido = new SalesOrder();
-                pedido.Cliente = clientes[random.Next(0, clientes.Length)];                
+                pedido.Customer = clientes[random.Next(0, clientes.Length)];                
 
                 int quantidadeItens = random.Next(0, 20);
 
@@ -50,10 +51,10 @@ namespace Playground
                 {
                     SalesOrderItem itemVenda = new SalesOrderItem();
 
-                    itemVenda.Produto = produtos[random.Next(0, produtos.Length)];
-                    itemVenda.Quantidade = random.Next(0, 5);
-                    itemVenda.ValorVenda = itemVenda.Produto.ValorVenda;
-                    itemVenda.PedidoVenda = pedido;
+                    itemVenda.Product = produtos[random.Next(0, produtos.Length)];
+                    itemVenda.Quantity = random.Next(0, 5);
+                    itemVenda.Value = itemVenda.Product.SaleValue;
+                    itemVenda.SalesOrder = pedido;
                     
                     pedido.Items.Add(itemVenda);
                 }
@@ -63,7 +64,7 @@ namespace Playground
                 listOfPedidos.Add(pedido);
             }
 
-            var repPedidos = new PantheonRepository<SalesOrder>();
+            var repPedidos = new SalesOrderRepository();
             repPedidos.Save(listOfPedidos, true);
 
             repPedidos.Save(listOfPedidos);
@@ -71,7 +72,7 @@ namespace Playground
 
         private static void CriarNovosClientes()
         {
-            var repPaises= new PantheonRepository<Country>();
+            var repPaises= new CountryRepository();
             
             var paises = repPaises.GetAll().ToArray();
 
@@ -82,20 +83,19 @@ namespace Playground
 
                 Customer novoCliente = new Customer();
 
-                novoCliente.Nome = "Cliente " + (i + 1).ToString();
-                novoCliente.EnderecoAtual = new Address();
-                novoCliente.EnderecoAtual.Bairro = "Bairro";
-                novoCliente.EnderecoAtual.Cep = "CEP";
-                novoCliente.EnderecoAtual.Logradouro = "Logradouro";
-                novoCliente.EnderecoAtual.Numero = "Numero";
-                novoCliente.EnderecoAtual.Pais = paises[randomGenerator.Next(0, paises.Count())];
+                novoCliente.Name = "Cliente " + (i + 1).ToString();
+                novoCliente.CurrentAddress = new Address();
+                novoCliente.CurrentAddress.ZipCode = "CEP";
+                novoCliente.CurrentAddress.Street = "Logradouro";
+                novoCliente.CurrentAddress.Number = "Numero";
+                novoCliente.CurrentAddress.Country = paises[randomGenerator.Next(0, paises.Count())];
                 
                 listOfClientes.Add(novoCliente);
 
                 System.Threading.Thread.Sleep(1);
             }
 
-            var repClientes = new PantheonRepository<Customer>();
+            var repClientes = new CustomerRepository();
 
             repClientes.Save(listOfClientes, true);
 
@@ -104,22 +104,22 @@ namespace Playground
 
         private static void CriarNovosProdutos()
         {
-            var listOfProdutos = new List<Produto>(100);
+            var listOfProdutos = new List<Product>(100);
             for (int i = 0; i < 100; i++)
             {
                 var randomGenerator = new Random(DateTime.Now.Millisecond);
 
-                Produto produto = new Produto();
-                produto.Nome = "Produto " + (i + 1).ToString();
-                produto.ValorCompra = (decimal)(randomGenerator.Next(1000) + randomGenerator.NextDouble());
-                produto.ValorVenda = produto.ValorCompra * 1.15M;
+                Product produto = new Product();
+                produto.Name = "Produto " + (i + 1).ToString();
+                produto.BuyValue = (decimal)(randomGenerator.Next(1000) + randomGenerator.NextDouble());
+                produto.SaleValue = produto.BuyValue * 1.15M;
 
                 listOfProdutos.Add(produto);
 
                 System.Threading.Thread.Sleep(1);
             }
 
-            var rep = new PantheonRepository<Produto>();
+            var rep = new ProductRepository();
 
             rep.Save(listOfProdutos);
 
@@ -128,19 +128,19 @@ namespace Playground
 
         private static void CriarNovosPaises()
         {
-            var rep = new PantheonRepository<Country>();
+            var rep = new CountryRepository();
 
             var query = rep.GetAll();
 
             if (query.Count() == 0)
             {
-                Country paisBrasil = new Country() { Continente = Continent.America, Nome = "Brasil" };
-                Country paisChina = new Country() { Continente = Continent.Asia, Nome = "China" };
-                Country paisEUA = new Country() { Continente = Continent.America, Nome = "EUA" };
-                Country paisPortugal = new Country() { Continente = Continent.Europa, Nome = "Portugal" };
-                Country paisJapao = new Country() { Continente = Continent.Asia, Nome = "Japão" };
-                Country paisEgito = new Country() { Continente = Continent.Africa, Nome = "Egito" };
-                Country paisInglaterra = new Country() { Continente = Continent.Europa, Nome = "Inglaterra" };
+                Country paisBrasil = new Country() { Continent = Continent.America, Name = "Brasil" };
+                Country paisChina = new Country() { Continent = Continent.Asia, Name = "China" };
+                Country paisEUA = new Country() { Continent = Continent.America, Name = "EUA" };
+                Country paisPortugal = new Country() { Continent = Continent.Europe, Name = "Portugal" };
+                Country paisJapao = new Country() { Continent = Continent.Asia, Name = "Japão" };
+                Country paisEgito = new Country() { Continent = Continent.Africa, Name = "Egito" };
+                Country paisInglaterra = new Country() { Continent = Continent.Europe, Name = "Inglaterra" };
                 
                 rep.Save(new Country[] {
                                     paisBrasil,

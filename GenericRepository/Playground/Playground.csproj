@@ -32,6 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\GenericRepository\bin\Debug\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -51,6 +55,14 @@
     <ProjectReference Include="..\GenericRepository\GenericRepository.csproj">
       <Project>{cbbfe2d2-8120-49b7-a2a6-a3696eb111fc}</Project>
       <Name>GenericRepository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SaleData\SaleData.csproj">
+      <Project>{2848649f-22ec-4be9-b4f7-86548193f28f}</Project>
+      <Name>SaleData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SaleEntities\SaleEntities.csproj">
+      <Project>{297dbc09-bde3-438f-b434-4b4a157e8a06}</Project>
+      <Name>SaleEntities</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
