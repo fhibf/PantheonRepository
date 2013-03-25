@@ -106,7 +106,7 @@ namespace GenericRepository
             {
                 if (IsEntityProperty(property))
                 {
-                    if (property.PropertyType.IsArray || (property.PropertyType.IsGenericType && property.PropertyType.GetGenericTypeDefinition() == typeof(List<>)))
+                    if (property.PropertyType.IsArray || property.GetValue(entity, null) is IEnumerable<object>)
                     {
                         IEnumerable<object> itensOfArray = (IEnumerable<object>)property.GetValue(entity);
 
@@ -130,7 +130,7 @@ namespace GenericRepository
                 }
             }
         }
-
+        
         private bool IsEntityProperty(PropertyInfo property)
         {
             return property.PropertyType.IsClass && property.PropertyType != typeof(string);
@@ -144,7 +144,7 @@ namespace GenericRepository
             {
                 if (IsEntityProperty(property))
                 {
-                    if (property.PropertyType.IsArray)
+                    if (property.PropertyType.IsArray || property.GetValue(entity, null) is IEnumerable<object>)
                     {
                         IEnumerable<object> itensOfArray = (IEnumerable<object>)property.GetValue(entity);
 
