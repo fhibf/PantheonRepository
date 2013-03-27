@@ -44,16 +44,12 @@
   <ItemGroup>
     <Compile Include="DataContext\DataContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\AddressRepository.cs" />
-    <Compile Include="Repository\SalesOrderRepository.cs" />
-    <Compile Include="Repository\ProductRepository.cs" />
-    <Compile Include="Repository\CustomerRepository.cs" />
-    <Compile Include="Repository\CountryRespository.cs" />
+    <Compile Include="Repository\RepositoryFactory.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GenericRepository\GenericRepository.csproj">
+    <ProjectReference Include="..\GenericRepository\Pantheon.csproj">
       <Project>{cbbfe2d2-8120-49b7-a2a6-a3696eb111fc}</Project>
-      <Name>GenericRepository</Name>
+      <Name>Pantheon %28Pantheon\Pantheon%29</Name>
     </ProjectReference>
     <ProjectReference Include="..\SaleEntities\SaleEntities.csproj">
       <Project>{297dbc09-bde3-438f-b434-4b4a157e8a06}</Project>

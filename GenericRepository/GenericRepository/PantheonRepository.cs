@@ -9,9 +9,9 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GenericRepository
+namespace Pantheon
 {
-    public class PantheonRepository<TEntity, TDbContext> : IPantheonRepository<TEntity> 
+    public class PantheonRepository<TEntity, TDbContext> : IRepository<TEntity> 
             where TEntity : class
             where TDbContext : class
     {
@@ -30,7 +30,7 @@ namespace GenericRepository
         /// Create new context do manipulate data.
         /// </summary>
         /// <returns>Return new instance of the context.</returns>
-        protected DbContext CreateContext()
+        private DbContext CreateContext()
         {
             return (DbContext)Activator.CreateInstance(typeof(TDbContext));
         }

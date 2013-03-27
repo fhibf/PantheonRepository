@@ -7,8 +7,8 @@
     <ProjectGuid>{CBBFE2D2-8120-49B7-A2A6-A3696EB111FC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GenericRepository</RootNamespace>
-    <AssemblyName>GenericRepository</AssemblyName>
+    <RootNamespace>Pantheon</RootNamespace>
+    <AssemblyName>Pantheon</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -44,9 +44,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IPantheonRepository.cs" />
+    <Compile Include="IRepository.cs" />
     <Compile Include="PantheonRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="IRepositoryFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericRepository", "GenericRepository\GenericRepository.csproj", "{CBBFE2D2-8120-49B7-A2A6-A3696EB111FC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pantheon", "GenericRepository\Pantheon.csproj", "{CBBFE2D2-8120-49B7-A2A6-A3696EB111FC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground", "Playground\Playground.csproj", "{AAE3ECBE-F429-43C0-95AB-C37043E89C2A}"
 EndProject
