@@ -153,28 +153,32 @@ namespace Pantheon
             {
                 if (IsEntityProperty(property))
                 {
-                    if (IsArray(entity, property))
+                    if (property.PropertyType.IsArray || property.GetValue(entity, null) is IEnumerable<object>)
                     {
-                        IEnumerable<object> itensOfArray = (IEnumerable<object>)property.GetValue(entity);
+                        IEnumerable<object> itensOfArray = (IEnumerable<object>)property.GetValue(entity, null);
 
                         if (itensOfArray != null)
                         {
-                            foreach (PropertyInfo itemOfArray in itensOfArray)
+                            foreach (object itemOfArray in itensOfArray)
                             {
-                                var value = itemOfArray.GetValue(entity);
+                                int nestedPropertyPrimaryKeyValue = IdentityPrimaryKeyValue(itemOfArray, context);
 
-                                if (value != parent)
+                                if (itemOfArray != parent)
                                 {
-                                    context.Entry(value).State = state;
+                                    var currentStatus = context.Entry(itemOfArray).State;
 
-                                    SetNestedPropertiesStatus(value, context, state, entity);
+                                    if (!(nestedPropertyPrimaryKeyValue == 0 && currentStatus == EntityState.Added))
+                                    {
+                                        context.Entry(itemOfArray).State = state;
+                                        SetNestedPropertiesStatus(itemOfArray, context, state, entity);
+                                    }
                                 }
                             }
                         }
                     }
                     else
                     {
-                        var nestedPropertyToUpdate = property.GetValue(entity);
+                        var nestedPropertyToUpdate = property.GetValue(entity, null);
 
                         if (nestedPropertyToUpdate != null)
                         {
@@ -189,7 +193,7 @@ namespace Pantheon
                 }
             }
         }
-
+        
         private void SetStateOfEntity(object entity, DbContext context, bool saveNestedProperties, object parent)
         {
             EntityState targetState = EntityState.Added;
