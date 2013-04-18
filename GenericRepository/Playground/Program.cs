@@ -1,4 +1,6 @@
-﻿using SaleData.Repository;
+﻿using Pantheon;
+using SaleData.DataContext;
+using SaleData.Repository;
 using SaleEntities;
 using System;
 using System.Collections.Generic;
@@ -12,7 +14,7 @@ namespace Playground
     {
         static void Main(string[] args)
         {
-            for (int i = 0; i < 50; i++)
+            for (int i = 0; i < 1; i++)
             {            
                 // Create new countries
                 CreateNewCountries();
@@ -27,7 +29,7 @@ namespace Playground
                 CreateNewOrders();
             }
         }
-
+                
         private static void CreateNewOrders()
         {
             var repProducts = (new RepositoryFactory<Product>()).CreateRepository();

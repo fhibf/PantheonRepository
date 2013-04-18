@@ -135,14 +135,18 @@ namespace Pantheon
         {
             bool returnValue = false;
 
-            returnValue = property.PropertyType.IsArray || property.GetValue(entity, null) is IEnumerable<object>;
+            returnValue = (property.PropertyType.IsArray ||
+                           property.GetValue(entity, null) is IEnumerable<object>)
+                           && property.PropertyType != typeof(byte[]);
 
             return returnValue;
         }
 
         private bool IsEntityProperty(PropertyInfo property)
         {
-            return property.PropertyType.IsClass && property.PropertyType != typeof(string);
+            return property.PropertyType.IsClass && 
+                   property.PropertyType != typeof(string) && 
+                   property.PropertyType != typeof(byte[]);
         }
 
         private void SetNestedPropertiesStatus(object entity, DbContext context, EntityState state, object parent)
