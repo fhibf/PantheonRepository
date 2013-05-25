@@ -32,8 +32,8 @@ namespace Playground
                 
         private static void CreateNewOrders()
         {
-            var repProducts = (new RepositoryFactory<Product>()).CreateRepository();
-            var repCustomers = (new RepositoryFactory<Customer>()).CreateRepository();
+            var repProducts = (new RepositoryFactory<Product>()).CriarRepositorio();
+            var repCustomers = (new RepositoryFactory<Customer>()).CriarRepositorio();
             
             var products = repProducts.GetAll().ToArray();
             var customers = repCustomers.GetAll("CurrentAddress").ToArray();
@@ -65,7 +65,7 @@ namespace Playground
                 listOfSales.Add(sale);
             }
 
-            var repSales = (new RepositoryFactory<SalesOrder>()).CreateRepository();
+            var repSales = (new RepositoryFactory<SalesOrder>()).CriarRepositorio();
             repSales.Save(listOfSales, true);
 
             repSales.Save(listOfSales);
@@ -73,7 +73,7 @@ namespace Playground
 
         private static void CreateNewCustomers()
         {
-            var repCountries = (new RepositoryFactory<Country>()).CreateRepository(); 
+            var repCountries = (new RepositoryFactory<Country>()).CriarRepositorio(); 
             
             var countries = repCountries.GetAll().ToArray();
 
@@ -96,7 +96,7 @@ namespace Playground
                 System.Threading.Thread.Sleep(1);
             }
 
-            var repCustomers = (new RepositoryFactory<Customer>()).CreateRepository();
+            var repCustomers = (new RepositoryFactory<Customer>()).CriarRepositorio();
 
             repCustomers.Save(listOfCustomers, true);
 
@@ -120,7 +120,7 @@ namespace Playground
                 System.Threading.Thread.Sleep(1);
             }
 
-            var rep = (new RepositoryFactory<Product>()).CreateRepository();
+            var rep = (new RepositoryFactory<Product>()).CriarRepositorio();
 
             rep.Save(listOfProducts);
 
@@ -129,7 +129,7 @@ namespace Playground
 
         private static void CreateNewCountries()
         {
-            var rep = (new RepositoryFactory<Country>()).CreateRepository();
+            var rep = (new RepositoryFactory<Country>()).CriarRepositorio();
 
             var query = rep.GetAll();
 

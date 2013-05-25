@@ -9,6 +9,6 @@ namespace Pantheon
     public interface IRepositoryFactory<T>
         where T : class 
     {
-        IRepository<T> CreateRepository();
+        IRepository<T> CriarRepositorio();
     }
 }

@@ -10,7 +10,7 @@ namespace SaleData.Repository
     public class RepositoryFactory<T> : IRepositoryFactory<T>
         where T : class
     {
-        public IRepository<T> CreateRepository()
+        public IRepository<T> CriarRepositorio()
         {
             return new PantheonRepository<T, DataContext.DataContext>();
         }
