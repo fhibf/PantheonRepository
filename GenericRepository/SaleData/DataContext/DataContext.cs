@@ -27,6 +27,8 @@ namespace SaleData.DataContext
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.ComplexType<CustomerDetails>();
+
             modelBuilder.Entity<Product>().ToTable("Produto");
             modelBuilder.Entity<Customer>().ToTable("Cliente");
             modelBuilder.Entity<SalesOrder>().ToTable("PedidoVenda");

@@ -106,6 +106,12 @@ namespace Pantheon
             {
                 if (IsEntityProperty(property))
                 {
+                    // Como identificar se uma entidade é um tipo complexo...
+
+
+
+
+
                     if (IsArray(entity, property))
                     {
                         IEnumerable<object> itensOfArray = (IEnumerable<object>)property.GetValue(entity);

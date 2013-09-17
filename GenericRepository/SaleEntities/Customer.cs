@@ -18,6 +18,8 @@ namespace SaleEntities
 
         public IEnumerable<SalesOrder> Sales { get; set; }
 
+        public CustomerDetails Details { get; set; }
+
         public Customer()
         {
             this.Sales = new List<SalesOrder>();
