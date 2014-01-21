@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Data.Objects;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -285,7 +286,7 @@ namespace Pantheon
             }
         }
 
-        public IEnumerable<TEntity> Query(Func<TEntity, bool> query)
+        public IEnumerable<TEntity> Query(Expression<Func<TEntity, bool>> query)
         {
             this._currentAction = RepositoryAction.Searching;
 
@@ -331,7 +332,7 @@ namespace Pantheon
             return result;
         }
 
-        public IEnumerable<TEntity> Query(Func<TEntity, bool> query, params string[] includeProperties)
+        public IEnumerable<TEntity> Query(Expression<Func<TEntity, bool>> query, params string[] includeProperties)
         {
             this._currentAction = RepositoryAction.Searching;
 

@@ -52,7 +52,7 @@ namespace PlaygroundVisualStudioSummit2013.Business {
 
             var rep = Data.RepositoryFactory<Funcionario>.Criar();
 
-            returnValue = rep.GetAll();
+            returnValue = rep.Query(f => f.Nome == "teste");
 
             return returnValue;
         }

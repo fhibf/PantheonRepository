@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace Pantheon
 {
@@ -9,9 +10,9 @@ namespace Pantheon
         
         IEnumerable<TEntity> GetAll(params string[] includeProperties);
         
-        IEnumerable<TEntity> Query(Func<TEntity, bool> query);
-        
-        IEnumerable<TEntity> Query(Func<TEntity, bool> query, params string[] includeProperties);
+        IEnumerable<TEntity> Query(Expression<Func<TEntity, bool>> query);
+
+        IEnumerable<TEntity> Query(Expression<Func<TEntity, bool>> query, params string[] includeProperties);
         
         TEntity Save(IEnumerable<TEntity> entities);
         
